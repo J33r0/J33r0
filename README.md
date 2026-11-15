@@ -105,7 +105,7 @@ My CV is a repo. On every push, **GitHub Actions** detects changes to the French
 
 ## 🏆 Achievements
 
-- 🥇 **1st prize, Capture The Flag (UDLA, Quito)**: captain of a 3-person team, exploiting system and web vulnerabilities.
+- 🥇 **1st prize, Capture The Flag (UDLA, Quito)** · Feb 2021: captain of a 3-person team, exploiting system and web vulnerabilities.
 
 ---
 
