@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="760" height="300" rx="14" fill="#0d0117"/>
+
+  <!-- User -->
+  <rect x="30" y="105" width="120" height="60" rx="30" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="90" y="141" font-size="15" fill="#f3e8ff" text-anchor="middle">User</text>
+
+  <!-- Request paths -->
+  <path d="M150,135 C300,135 380,70 518,70" stroke="#4c1d95" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+  <path d="M150,135 C300,135 380,160 518,160" stroke="#4c1d95" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+
+  <!-- Node 1 (primary) : turns red when stopped -->
+  <rect x="520" y="40" width="210" height="60" rx="8" stroke="#a855f7" stroke-width="1.5" fill="#3b0764">
+    <animate attributeName="fill" dur="8s" repeatCount="indefinite" calcMode="discrete"
+             values="#3b0764;#7f1d1d;#3b0764" keyTimes="0;0.4;0.97"/>
+  </rect>
+  <text x="625" y="66" font-size="14" fill="#f3e8ff" text-anchor="middle">Node 1 (primary)</text>
+  <text x="625" y="86" font-size="11" fill="#86efac" text-anchor="middle">running
+    <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="1;0;1" keyTimes="0;0.4;0.97"/>
+  </text>
+  <text x="625" y="86" font-size="11" fill="#fca5a5" text-anchor="middle" opacity="0">stopped on purpose
+    <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;1;0" keyTimes="0;0.4;0.97"/>
+  </text>
+
+  <!-- Node 2 -->
+  <rect x="520" y="130" width="210" height="60" rx="8" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="625" y="156" font-size="14" fill="#f3e8ff" text-anchor="middle">Node 2</text>
+  <text x="625" y="176" font-size="11" fill="#86efac" text-anchor="middle">running</text>
+
+  <!-- Node 3 -->
+  <rect x="520" y="220" width="210" height="60" rx="8" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="625" y="246" font-size="14" fill="#f3e8ff" text-anchor="middle">Node 3</text>
+  <text x="625" y="266" font-size="11" fill="#86efac" text-anchor="middle">running</text>
+
+  <!-- Virtual IP badge: moves from Node 1 to Node 2 -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" dur="8s" repeatCount="indefinite"
+                      values="0 0;0 0;0 90;0 90;0 0" keyTimes="0;0.45;0.55;0.97;1"/>
+    <rect x="455" y="55" width="58" height="30" rx="15" fill="#a855f7" filter="url(#glow)"/>
+    <text x="484" y="75" font-size="13" font-weight="700" fill="#0d0117" text-anchor="middle">VIP</text>
+  </g>
+
+  <!-- Requests -->
+  <circle r="6" fill="#f0abfc" filter="url(#glow)">
+    <animateMotion dur="1.3s" repeatCount="indefinite" path="M150,135 C300,135 380,70 518,70"/>
+    <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="1;0;1" keyTimes="0;0.4;0.97"/>
+  </circle>
+  <circle r="6" fill="#f0abfc" filter="url(#glow)" opacity="0">
+    <animateMotion dur="1.3s" repeatCount="indefinite" path="M150,135 C300,135 380,160 518,160"/>
+    <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;1;0" keyTimes="0;0.55;0.97"/>
+  </circle>
+
+  <!-- Captions -->
+  <g font-size="14" font-weight="700" text-anchor="start">
+    <text x="30" y="40" fill="#e9d5ff">1. Traffic served by Node 1
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="1;0;1" keyTimes="0;0.4;0.97"/>
+    </text>
+    <text x="30" y="40" fill="#fca5a5" opacity="0">2. I stop Node 1 on purpose
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.4;0.55;1"/>
+    </text>
+    <text x="30" y="40" fill="#86efac" opacity="0">3. VRRP moves the VIP: no downtime
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;1;0" keyTimes="0;0.55;0.97"/>
+    </text>
+  </g>
+  <text x="30" y="270" font-size="11" fill="#a78bfa">keepalived / VRRP · k3s HA cluster</text>
+</svg>
